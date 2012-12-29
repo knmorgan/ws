@@ -1,0 +1,13 @@
+The Free Whitespace Interpreter
+===============================
+
+This program is (as far as I know) a fully-compliant interpreter for the
+esoteric programming language known as Whitespace.  A description of Whitespace
+can be viewed here:
+
+http://compsoc.dur.ac.uk/whitespace/index.php
+
+Dependencies
+============
+The only dependencies are a C++ compiler and the GNU multiple precision library
+(GMP).
