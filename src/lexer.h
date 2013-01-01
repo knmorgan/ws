@@ -116,9 +116,9 @@ class lexer {
   mpz_class next_integer(void);
   char next(void);
   
-  std::ifstream stream;
-  char* buf;
-  int buf_size;
-  int ptr;
+  std::ifstream stream_;
+  char* buf_;
+  int buf_size_;
+  int ptr_;
 };
 #endif

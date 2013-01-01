@@ -30,10 +30,12 @@ class ws_stack {
   void copy(int);
   void slide(int);
   mpz_class top(void);
+
  private:
   ws_stack(const ws_stack&);
   ws_stack& operator=(const ws_stack&);
-  std::deque<mpz_class> stack;
+
+  std::deque<mpz_class> stack_;
 };
 
 #endif

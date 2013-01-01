@@ -31,7 +31,8 @@ class ws_heap {
  private:
   ws_heap(const ws_heap&);
   ws_heap& operator=(const ws_heap&);
-  std::map<mpz_class,mpz_class> heap;
+
+  std::map<mpz_class,mpz_class> heap_;
 };
 
 #endif

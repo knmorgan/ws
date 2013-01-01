@@ -44,15 +44,15 @@ class parser {
   void jump(std::vector<token>::iterator);
   void exit(void);
 
-  bool exited;
-  const char* fname;
-  unsigned long stack_limit;
-  ws_heap heap;
-  ws_stack stack;
-  std::vector<token> parse_vec;
-  std::stack<std::vector<token>::iterator> call_stack;
-  std::map<mpz_class,std::vector<token>::iterator> labels;
-  std::vector<token>::iterator command;
+  bool exited_;
+  const char* fname_;
+  unsigned long stack_limit_;
+  ws_heap heap_;
+  ws_stack stack_;
+  std::vector<token> parse_vec_;
+  std::stack<std::vector<token>::iterator> call_stack_;
+  std::map<mpz_class,std::vector<token>::iterator> labels_;
+  std::vector<token>::iterator command_;
 };
 
 #endif

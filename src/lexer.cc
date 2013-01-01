@@ -1,19 +1,19 @@
 #include "lexer.h"
 
 lexer::lexer(const char* file, int size) {
-  stream.open(file, std::ifstream::in | std::ifstream::binary);
-  if(!stream) {
+  stream_.open(file, std::ifstream::in | std::ifstream::binary);
+  if(!stream_) {
     throw file_not_found(file);
   }
 
-  buf = new char[size];
-  buf_size = size;
-  ptr = size;
+  buf_ = new char[size];
+  buf_size_ = size;
+  ptr_ = size;
 }
 
 lexer::~lexer(void) {
-  stream.close();
-  delete[] buf;
+  stream_.close();
+  delete[] buf_;
 }
 
 token lexer::next_token(void) {
@@ -146,17 +146,17 @@ token lexer::next_io(void) {
 char lexer::next(void) {
   char c;
   do {
-    if(ptr == buf_size) {
-      ptr = 0;
-      stream.read(buf, buf_size);
-      if(stream.eof()) {
-        buf_size = static_cast<int>(stream.gcount());
+    if(ptr_ == buf_size_) {
+      ptr_ = 0;
+      stream_.read(buf_, buf_size_);
+      if(stream_.eof()) {
+        buf_size_ = static_cast<int>(stream_.gcount());
       }
-      if(buf_size == 0) {
+      if(buf_size_ == 0) {
         return EOF;
       }
     }
-    c = buf[ptr++];
+    c = buf_[ptr_++];
   } while(c != SPACE && c != TAB && c != LF);
   return c;
 }

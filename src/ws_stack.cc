@@ -5,23 +5,23 @@ ws_stack::ws_stack(void) { }
 ws_stack::~ws_stack(void) { }
 
 void ws_stack::push(mpz_class val) {
-  stack.push_back(val);
+  stack_.push_back(val);
 }
 
 void ws_stack::pop(void) {
-  if(stack.empty()) {
+  if(stack_.empty()) {
     throw stack_error("tried to pop empty stack.");
   }
 
-  stack.pop_back();
+  stack_.pop_back();
 }
 
 mpz_class ws_stack::top(void) {
-  if(stack.empty()) {
+  if(stack_.empty()) {
     throw stack_error("tried to access top of empty stack.");
   }
 
-  return stack.back();
+  return stack_.back();
 }
 
 void ws_stack::swap(void) {
@@ -35,7 +35,7 @@ void ws_stack::swap(void) {
 }
 
 void ws_stack::copy(int n) {
-  push(stack[n]);
+  push(stack_[n]);
 }
 
 void ws_stack::slide(int n) {
