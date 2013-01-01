@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
         p.execute();
       } catch(ws_error& e) {
         std::cerr << e << std::endl;
-		return EXIT_FAILURE;
+        return EXIT_FAILURE;
       }
     }
   }
