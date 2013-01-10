@@ -10,7 +10,7 @@ RM = rm -rf
 all: $(TARGET)
 
 ws: $(OBJFILES)
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) $^ $(LDFLAGS) -o $@
 
 obj/%.o: src/%.cc src/%.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
