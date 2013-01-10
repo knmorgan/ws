@@ -3,6 +3,8 @@
 #include "lexer.h"
 #include "parser.h"
 
+#include <cstdlib>
+
 std::ostream& operator<<(std::ostream& os, ws_error& err) {
   return os << err.get_error();
 }
