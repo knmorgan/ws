@@ -44,8 +44,8 @@ void parser::execute(void) {
   build_label_index();
 
   token t;
-  for(command_ = parse_vec_.begin(); command_ != parse_vec_.end() && !exited_; ++command_) {
-    t = *command_; 
+  for(cur_ = parse_vec_.begin(); cur_ != parse_vec_.end() && !exited_; ++cur_) {
+    t = *cur_; 
     switch(t.type()) {
       case token::STACK_MANIPULATION:
         handle_stack(t);
@@ -146,11 +146,13 @@ void parser::handle_heap(token t) {
 void parser::handle_flow_control(token t) {
   switch(t.op()) {
     case token::MARK:
-      labels_[t.arg()] = command_;
+      labels_[t.arg()] = cur_;
       break;
     case token::CALL:
-      if(call_stack_.size() > stack_limit_) throw generic_error("stack overlow");
-      call_stack_.push(command_);
+      if(call_stack_.size() > stack_limit_) {
+        throw generic_error("stack overlow");
+      }
+      call_stack_.push(cur_);
       jump(t.arg());
       break;
     case token::JUMP:
@@ -205,15 +207,14 @@ void parser::handle_io(token t) {
 }
 
 void parser::jump(mpz_class l) {
-  std::map<mpz_class,std::vector<token>::iterator>::iterator it = labels_.find(l);
-  if(it == labels_.end()) {
+  if(labels_.find(l) == labels_.end()) {
     throw generic_error("attempting to jump to nonexistent label");
   }
-  command_ = it->second;
+  cur_ = labels_[l];
 }
 
 void parser::jump(std::vector<token>::iterator pos) {
-  command_ = pos;
+  cur_ = pos;
 }
 
 void parser::exit(void) {

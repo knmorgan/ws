@@ -80,7 +80,10 @@ class token {
   };
 
   token(void) { }
-  token(command c, operation o, mpz_class val = 0) : type_(c), op_(o), arg_(val) { }
+  token(command c, operation o, mpz_class val = 0) :
+    type_(c),
+    op_(o),
+    arg_(val) { }
 
   command type() {
     return type_;

@@ -52,7 +52,7 @@ class parser {
   std::vector<token> parse_vec_;
   std::stack<std::vector<token>::iterator> call_stack_;
   std::map<mpz_class,std::vector<token>::iterator> labels_;
-  std::vector<token>::iterator command_;
+  std::vector<token>::iterator cur_;
 };
 
 #endif
