@@ -2,7 +2,7 @@
 #define LEXER_H
 
 #include <gmpxx.h>
-#include <fstream>
+#include <istream>
 
 #include "ws.h"
 
@@ -119,7 +119,7 @@ class lexer {
   mpz_class next_integer(void);
   char next(void);
   
-  std::ifstream stream_;
+  std::istream* stream_;
   char* buf_;
   int buf_size_;
   int ptr_;

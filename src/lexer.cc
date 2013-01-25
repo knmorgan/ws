@@ -1,8 +1,16 @@
 #include "lexer.h"
 
-lexer::lexer(const char* file, int size) {
-  stream_.open(file, std::ifstream::in | std::ifstream::binary);
-  if(!stream_) {
+#include <cstring>
+#include <fstream>
+
+static std::istream* get_stream(const char* file) {
+  return strcmp(file, "-")
+         ? new std::ifstream(file, std::ifstream::in | std::ifstream::binary)
+         : &std::cin;
+}
+
+lexer::lexer(const char* file, int size) : stream_(get_stream(file)) {
+  if(stream_->fail()) {
     throw file_not_found(file);
   }
 
@@ -12,7 +20,9 @@ lexer::lexer(const char* file, int size) {
 }
 
 lexer::~lexer(void) {
-  stream_.close();
+  if(stream_ != &std::cin) {
+    delete stream_;
+  }
   delete[] buf_;
 }
 
@@ -148,9 +158,9 @@ char lexer::next(void) {
   do {
     if(ptr_ == buf_size_) {
       ptr_ = 0;
-      stream_.read(buf_, buf_size_);
-      if(stream_.eof()) {
-        buf_size_ = static_cast<int>(stream_.gcount());
+      stream_->read(buf_, buf_size_);
+      if(stream_->eof()) {
+        buf_size_ = static_cast<int>(stream_->gcount());
       }
       if(buf_size_ == 0) {
         return EOF;

@@ -10,23 +10,9 @@
 #include "ws_stack.h"
 #include "ws.h"
 
-class generic_error : public ws_error {
- public:
-  generic_error(const char* str) {
-    err_ = std::string("Error: ") + str;
-  }
-
-  std::string& get_error(void) {
-    return err_;
-  }
-
- private:
-  std::string err_;
-};
-
 class parser {
  public:
-  parser(const char*, unsigned long = 1e6);
+  parser(const char*);
   ~parser(void);
 
   void parse(void);

@@ -3,10 +3,9 @@
 #include <gmpxx.h>
 #include <iostream>
 
-parser::parser(const char* file, unsigned long limit) :
+parser::parser(const char* file) :
   exited_(false),
-  fname_(file),
-  stack_limit_(limit) { }
+  fname_(file) { }
 
 parser::~parser() { }
 
@@ -149,7 +148,7 @@ void parser::handle_flow_control(token t) {
       labels_[t.arg()] = cur_;
       break;
     case token::CALL:
-      if(call_stack_.size() > stack_limit_) {
+      if(call_stack_.size() >= get_stack_limit()) {
         throw generic_error("stack overlow");
       }
       call_stack_.push(cur_);
